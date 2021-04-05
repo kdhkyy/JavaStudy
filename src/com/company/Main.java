@@ -1,134 +1,63 @@
 package com.company;
 
 
+import sun.security.jca.GetInstance;
+
 import java.lang.reflect.Array;
 import java.math.BigInteger;
+import java.nio.file.FileStore;
+import java.nio.file.Files;
 import java.time.Instant;
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.*;
+
+import static sun.security.jca.GetInstance.*;
 
 
 public class Main {
 
-    public class Food {
-        private final int servingSize;
-        private final int servings;
-        private final int calories;
-        private final int fat;
-        private final int sodium;
-        private final int carbohydrate;
-
-        public class Builder {
-            // Required parameters(필수 인자)
-            private final int svSize;
-            private final int sv;
-
-            private int calories      = 0;
-            private int fat           = 0;
-            private int carbohydrate  = 0;
-            private int sodium        = 0;
-
-            public Builder(int servingSize, int servings) {
-                this.svSize = servingSize;
-                this.sv     = servings;
-            }
-
-            public Builder calories(int val) {
-                calories = val;
-                return this;
-            }
-            public Builder fat(int val) {
-                fat = val;
-                return this;
-            }
-            public Builder carbohydrate(int val) {
-                carbohydrate = val;
-                return this;
-            }
-            public Builder sodium(int val) {
-                sodium = val;
-                return this;
-            }
-            public Food build() {
-                return new Food(this);
-            }
-        }
-
-        private Food(Builder builder) {
-            servingSize  = builder.svSize;
-            servings     = builder.sv;
-            calories     = builder.calories;
-            fat          = builder.fat;
-            sodium       = builder.sodium;
-            carbohydrate = builder.carbohydrate;
-        }
-    }
-
-    enum Day{
-        MONDAY, TUSDAY, WENDSDAY
-    }
-
-    public enum Car{
-        n1, n2, n3
+    enum cc{
+        TEST1, TEST2, TEST3
     }
 
     public static void main(String[] args) {
 
         // 1. from
-        Date date = Date.from(Instant.now());
-        System.out.println("date : " + date);
+        Car car = Car.from("sam");
+        System.out.println("1 : "+car.getCarName());
 
         // 2. of
-        Set<Car> of = EnumSet.of(Car.n1, Car.n2);
-        System.out.println("of : " + of);
+        EnumSet res = Car.of(cc.TEST1, cc.TEST2);
+        System.out.println("2 : "+res);
 
         // 3. valueOf
-        Integer a = Integer.valueOf(6);
-        System.out.println("a : " + a);
-        BigInteger b = BigInteger.valueOf(Integer.MAX_VALUE);
-        System.out.println(b);
+        Enum res3 = cc.valueOf("TEST1");
+        System.out.println("3 : "+res3);
+
+        Enum res4 = cc.valueOf(cc.TEST3.toString());
+        System.out.println("4 : "+res4);
 
         // 4. instance
-        Class cls = date.getClass();
-        try{
-            Object oo = cls.newInstance();
-            System.out.println("oo : " + oo);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        Object o = Array.newInstance(Car.class, 3);
-        System.out.println();
+        // 매개변수로 명시한 인스턴스를 반환하지만 같은 인스턴스임을 보장하지는 않는다(같은 인스턴스임을 보장하지 않는다라함은....??)
+        System.out.println("호출전 : " + car.hashCode());
+        Car res5 = Car.getInstance();
+        System.out.println("호출후 : " + res5.hashCode());
 
         // 5. create
+        Car res6 = Car.newInstance();
+        System.out.println("new 호출 후 : "+ res6.hashCode());
 
         // 6. getType
+        Car res7 = Car.getCar();
+        System.out.println("getType : "+ res7.hashCode());
 
         // 7. new Type
+        Car res8 = Car.newCar("뉴카");
+        System.out.println("newType : " + res8.hashCode());
+        System.out.println("name : "+ res8.getCarName());
 
-        // 8 type
-
-
-        EnumSet e1 = EnumSet.allOf(Day.class);
-        System.out.println(e1);
-        System.out.println(e1.clone());
-        e1 = EnumSet.of(Day.MONDAY, Day.WENDSDAY);
-        EnumSet e2 = e1.clone();
-        System.out.println(e1);
-        System.out.println(e1.hashCode());
-        System.out.println(e2.hashCode());
-
-
-        // equals 특징
-        // 1. x.equals(x) = true
-        // 2. x.equals(y) = true = y.equals(x) = true
-        // 3. x.equals(y) = y.equals(z) = x.equals(z) = true
-        // 4. x.equals(y) 를 반복적으로 호출했을때 항상 true or false 값을 리턴해야함 ?
-        // 5. x.equals(null) = false 무조껀 false!!
-
+        // 8 type -> 정확히 이해되지 않는부분 간결한 버전이 무엇을 말하는건지 ...음 ..
+        ArrayList res9 = Car.list(cc.TEST1);
+        System.out.println(res9);
 
     }
 
