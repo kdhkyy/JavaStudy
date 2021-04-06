@@ -3,11 +3,14 @@ package com.company;
 import java.lang.reflect.Array;
 import java.util.*;
 
-public class Car {
+public class Car implements Cloneable{
     private static final Car car = new Car();
     private int number = 0;
     private String carName = "";
     private String phone = "";
+
+    //clone 연습
+    private Object[] res;
 
     public static Car newInstance() {
         return car;
@@ -90,4 +93,17 @@ public class Car {
                 ", phone='" + phone + '\'' +
                 ']';
     }
+
+
+    //가변상태 참조하지 않음 단순 clone
+    @Override
+    protected Car clone() throws CloneNotSupportedException {
+        try{
+            return (Car) super.clone();
+        } catch(CloneNotSupportedException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
