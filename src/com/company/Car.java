@@ -5,9 +5,9 @@ import java.util.*;
 
 public class Car {
     private static final Car car = new Car();
-    private int number;
-    private String carName;
-    private String phone;
+    private int number = 0;
+    private String carName = "";
+    private String phone = "";
 
     public static Car newInstance() {
         return car;
@@ -44,7 +44,6 @@ public class Car {
         return list;
     }
 
-    //get set
     public int getNumber() {
         return number;
     }
@@ -69,6 +68,8 @@ public class Car {
         this.phone = phone;
     }
 
+
+
     @Override public boolean equals(Object o){
         if(o == this) return true;
         if(!(o instanceof Car)) return false;
@@ -79,5 +80,14 @@ public class Car {
     @Override
     public int hashCode() {
         return Objects.hash(number, carName, phone);
+    }
+
+    @Override
+    public String toString() {
+        return "Car[" +
+                "number=" + number +
+                ", carName='" + carName + '\'' +
+                ", phone='" + phone + '\'' +
+                ']';
     }
 }

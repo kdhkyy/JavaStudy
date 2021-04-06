@@ -1,17 +1,7 @@
 package com.company;
 
-
-import sun.security.jca.GetInstance;
-
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.math.BigInteger;
-import java.nio.file.FileStore;
-import java.nio.file.Files;
-import java.time.Instant;
 import java.util.*;
 
-import static sun.security.jca.GetInstance.*;
 
 
 public class Main {
@@ -89,7 +79,14 @@ public class Main {
         System.out.println("String 클래스의 equals : " + rr.equals(res7));
 
         System.out.println("hashCode : " + res8.hashCode());
-        
+
+        // 12. toString
+        res8.setPhone("010-2341-1234");
+        res8.setCarName("what");
+        res8.setNumber(14);
+        System.out.println(res8.toString());
+
+
     }
 
 }
