@@ -4,13 +4,12 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class Car {
-    private static Car car = new Car();
+    private static final Car car = new Car();
     private int number;
     private String carName;
     private String phone;
 
     public static Car newInstance() {
-        car = new Car();
         return car;
     }
 
@@ -35,7 +34,6 @@ public class Car {
     }
 
     public static Car newCar(String carName){
-        car = new Car();
         car.carName = carName;
         return car;
     }
@@ -69,5 +67,17 @@ public class Car {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override public boolean equals(Object o){
+        if(o == this) return true;
+        if(!(o instanceof Car)) return false;
+        Car car = (Car)o;
+        return ((Car) o).carName == carName && ((Car) o).number == number && ((Car) o).phone == phone;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, carName, phone);
     }
 }

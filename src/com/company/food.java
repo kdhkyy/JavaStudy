@@ -9,11 +9,12 @@ class Food {
     private final int sodium;
     private final int carbohydrate;
 
-    public class Builder {
+    public static class Builder {
         // Required parameters(필수 인자)
         private final int svSize;
         private final int sv;
-
+        
+        //추가 인자
         private int calories      = 0;
         private int fat           = 0;
         private int carbohydrate  = 0;
@@ -46,12 +47,19 @@ class Food {
     }
 
     public Food(Builder builder) {
-        servingSize  = builder.svSize;
-        servings     = builder.sv;
-        calories     = builder.calories;
-        fat          = builder.fat;
-        sodium       = builder.sodium;
-        carbohydrate = builder.carbohydrate;
+        this.servingSize  = builder.svSize;
+        this.servings     = builder.sv;
+        this.calories     = builder.calories;
+        this.fat          = builder.fat;
+        this.sodium       = builder.sodium;
+        this.carbohydrate = builder.carbohydrate;
+    }
+
+    //getter
+    public String getInfo(){
+        String foodInfo = String.format("servingSize: %d, servings: %d, calories: %d, fat: %d, sodium: %d, carbohydrate: %d"
+                , servingSize, servings, calories, fat, sodium, carbohydrate);
+        return foodInfo;
     }
 }
 
