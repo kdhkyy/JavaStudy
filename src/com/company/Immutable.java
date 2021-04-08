@@ -1,7 +1,5 @@
 package com.company;
 
-import com.sun.org.apache.bcel.internal.generic.IMUL;
-
 public class Immutable {
     private final int age;
     private final String name;
