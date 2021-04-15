@@ -1,7 +1,10 @@
 package com.company;
 
+import java.util.function.DoubleBinaryOperator;
+
 public enum EnumSample2 implements Operation{
-    PLUS("+"){
+//public enum EnumSample2{
+    /*PLUS("+"){
         @Override
         public double apply(double a, double b) {
             return a+b;
@@ -24,12 +27,18 @@ public enum EnumSample2 implements Operation{
         public double apply(double a, double b) {
             return a/b;
         }
-    };
+    };*/
+    PLUS("+",(x,y) -> x + y),
+    MINUS("-", (x,y) -> x - y),
+    TIMES("*", (x,y) -> x * y),
+    DIVIDE("/", (x,y) -> x * y);
 
     private final String symbol;
+    private final DoubleBinaryOperator doubleBinaryOperator;
 
-    private EnumSample2(String symbol) {
+    private EnumSample2(String symbol, DoubleBinaryOperator doubleBinaryOperator) {
         this.symbol = symbol;
+        this.doubleBinaryOperator = doubleBinaryOperator;
     }
 
     @Override
@@ -37,4 +46,8 @@ public enum EnumSample2 implements Operation{
         return symbol;
     }
 
+    @Override
+    public double apply(double a, double b) {
+        return doubleBinaryOperator.applyAsDouble(a, b);
+    }
 }
